@@ -47,6 +47,61 @@ bool checkSafeState(vector<vector<int>>& allocMatrix, vector<vector<int>>& maxMa
   return true;
   }
 
-int main() {
 
+int main() {
+  ifstream inputFile("input.txt");
+
+  if (!inputFile) {
+    cerr << "Error opening file." << endl;
+    return 1;
+  }
+
+  int numProcs, numRes;
+  inputFile >> numProcs >> numRes;
+
+  vector<vector<int>> allocMatrix(numProcs, vector<int>(numRes));
+  vector<vector<int>> maxMatrix(numProcs, vector<int>(numRes));
+
+  for (int i = 0; i < numProcs; i++) {
+    for (int j = 0; j < numRes; j++) {
+      inputFile >> allocMatrix[i][j];
+    }
+  }
+
+  for (int i = 0; i < numProcs; i++) {
+    for (int j = 0; j < numRes; j++) {
+      inputFile >> maxMatrix[i][j];
+    }
+  }
+
+  vector<int> availResources(numRes);
+  for (int j = 0; j < numRes; j++) {
+    inputFile >> availResources[j];
+  }
+
+  cout << "allocation:" << endl;
+  for (int i = 0; i < numProcs; i++) {
+    for (int j = 0; j < numRes; j++) {
+      cout << allocMatrix[i][j] << ' ';
+    }
+    cout << endl;
+  }
+
+  cout << "max:" << endl;
+  for (int i = 0; i < numProcs; i++) {
+    for (int j = 0; j < numRes; j++) {
+      cout << maxMatrix[i][j] << ' ';
+    }
+    cout << endl;
+  }
+
+  cout << "available:" << endl;
+  for (int j = 0; j < numRes; j++) {
+    cout << availResources[j] << ' ';
+  }
+  cout << endl;
+
+  checkSafeState(allocMatrix, maxMatrix, availResources, numProcs, numRes);
+
+  return 0;
 }
