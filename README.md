@@ -31,6 +31,9 @@ The Data is collected from the input file set up like this:
 <img width="194" height="580" alt="image" src="https://github.com/user-attachments/assets/fd3f92c6-4bc7-4304-84ea-992c5a0b6081" />
 
 
+## Bankers Algorithm
+After parsing the data, the need matrix is created. Then, loop through the processes, checking to see if they can be fulfilled. If they can be, they are immediately added to the path of safety, and their resources are added to the available resources. Continue with the rest of the processes.
+
 ---
 ## Compilation/Running the Program:
 Run the commands `g++ -o bankers bankers.cpp`and `./bankers` to produce the same output as this screenshot:
